@@ -10,23 +10,27 @@ namespace GameObjects
 {
     class Program
     {
+        //static List<GameObject> st = new List<GameObject>();
 
         static void Main ()
         {
-            char[,] triangle = new char[5 , 3] {
-                { '@' , ' ' , ' ' } ,
-                { '@' , '@' , ' ' } ,
-                { '@' , '@' , '@' } ,
-                { '@' , '@' , ' ' } ,
-                { '@' , ' ' , ' ' } };
-            Boundary b = new Boundary();
-            GameObject g1 = new GameObject(triangle , new Point(0 , 0) , b , "Patrol");
+            char[,] shape = new char[5 , 5] {
+                { '!' , ' ' , ' ','|','>' } ,
+                { '!' , '@' , ' ','|','>' } ,
+                { '!' , '@' , '>','|','>' } ,
+                { '!' , '@' , ' ','|','>' } ,
+                { '!' , ' ' , ' ','|','>' } };
+            Boundary premises = new Boundary();
+            GameObject g1 = new GameObject(shape , new Point(16 , 0) , premises , "Patrol");
+            // GameObject g2 = new GameObject(shape , new Point(0 , 0) , premises , "Diagonal");
             while (true)
             {
-                Thread.Sleep(10);
+                Thread.Sleep(100);
                 Console.Clear();
                 g1.move();
                 g1.draw();
+                // g2.move();
+                //g2.draw();
             }
         }
     }

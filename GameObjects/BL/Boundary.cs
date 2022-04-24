@@ -8,10 +8,10 @@ namespace GameObjects.BL
 {
     class Boundary
     {
-        public Point topLeft;
-        public Point topRight;
-        public Point bottomLeft;
-        public Point bottomRight;
+        private Point topLeft;
+        private Point topRight;
+        private Point bottomLeft;
+        private Point bottomRight;
         public Boundary ()
         {
             this.topLeft = new Point(0 , 0);
@@ -25,6 +25,22 @@ namespace GameObjects.BL
             this.topRight = topRight;
             this.bottomLeft = bottomLeft;
             this.bottomRight = bottomRight;
+        }
+        public Point getTopLeft ()
+        {
+            return topLeft;
+        }
+        public Point getBottomLeft ()
+        {
+            return bottomLeft;
+        }
+        public Point getTopRight ()
+        {
+            return topRight;
+        }
+        public Point getBottomRight ()
+        {
+            return bottomRight;
         }
 
     }

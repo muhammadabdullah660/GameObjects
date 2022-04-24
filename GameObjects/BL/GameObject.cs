@@ -8,12 +8,12 @@ namespace GameObjects.BL
 {
     class GameObject
     {
-        public char[,] shape;
-        public Point startingPoint;
-        public Boundary premises;
-        public String direction;
-        public int projectileSteps = 0;
-        public string directionPatrol = "Right";
+        private char[,] shape;
+        private Point startingPoint;
+        private Boundary premises;
+        private String direction;
+        private int projectileSteps = 0;
+        private string directionPatrol = "Right";
         public GameObject ()
         {
             this.shape = new char[1 , 3] { { '-' , '-' , '-' } };
@@ -52,18 +52,24 @@ namespace GameObjects.BL
             }
             else if (direction == "Projectile")
             {
-                if (projectileSteps <= 5)
+                if (projectileSteps <= 10)
                 {
-                    bottomRightDiagonal();
+                    Console.WriteLine(projectileSteps);
+
+                    bottomLeftDiagonal();
                     projectileSteps++;
                 }
-                else if (projectileSteps >= 5 && projectileSteps <= 7)
+                else if (projectileSteps >= 10 && projectileSteps <= 20)
                 {
+                    Console.WriteLine(projectileSteps);
+
                     moveLeftToRight();
                     projectileSteps++;
                 }
-                else if (projectileSteps >= 7 && projectileSteps <= 11)
+                else if (projectileSteps >= 20 && projectileSteps <= 30)
                 {
+                    Console.WriteLine(projectileSteps);
+
                     topLeftDiagonal();
                     projectileSteps++;
                 }
@@ -73,7 +79,7 @@ namespace GameObjects.BL
                 if (directionPatrol == "Right")
                 {
                     moveLeftToRight();
-                    if (startingPoint.y == premises.topRight.y)
+                    if (startingPoint.getY() == premises.getTopRight().getY())
                     {
                         directionPatrol = "Left";
                     }
@@ -81,7 +87,7 @@ namespace GameObjects.BL
                 else if (directionPatrol == "Left")
                 {
                     moveRightToLeft();
-                    if (startingPoint.y == premises.topLeft.y)
+                    if (startingPoint.getY() == premises.getTopLeft().getY())
                     {
                         directionPatrol = "Right";
                     }
@@ -90,48 +96,68 @@ namespace GameObjects.BL
         }
         public void moveLeftToRight ()
         {
-            if (startingPoint.y < premises.topRight.y)
+            if (startingPoint.getY() < premises.getTopRight().getY())
             {
-                startingPoint.y++;
+                int y = startingPoint.getY();
+                y++;
+                startingPoint.setY(y);
             }
         }
         public void moveRightToLeft ()
         {
-            if (startingPoint.y > premises.topLeft.y)
+            if (startingPoint.getY() > premises.getTopLeft().getY())
             {
-                startingPoint.y--;
+                int y = startingPoint.getY();
+                y--;
+                startingPoint.setY(y);
             }
         }
         public void topLeftDiagonal ()
         {
-            if (startingPoint.getX() < premises.bottomRight.x && startingPoint.getY() < premises.bottomRight.y)
+            if (startingPoint.getX() < premises.getBottomRight().getX() && startingPoint.getY() < premises.getBottomRight().getY())
             {
-                startingPoint.x++;
-                startingPoint.y++;
+                int x = startingPoint.getX();
+                int y = startingPoint.getY();
+                x++;
+                y++;
+                startingPoint.setX(x);
+                startingPoint.setY(y);
             }
         }
         public void topRightDiagonal ()
         {
-            if (startingPoint.getX() < premises.bottomLeft.x && startingPoint.getY() > premises.bottomLeft.y)
+            if (startingPoint.getX() < premises.getBottomLeft().getX() && startingPoint.getY() > premises.getBottomLeft().getY())
             {
-                startingPoint.x++;
-                startingPoint.y--;
+                int x = startingPoint.getX();
+                int y = startingPoint.getY();
+                x++;
+                y--;
+                startingPoint.setX(x);
+                startingPoint.setY(y);
             }
         }
         public void bottomRightDiagonal ()
         {
-            if (startingPoint.getX() > premises.topLeft.x && startingPoint.getY() > premises.topLeft.y)
+            if (startingPoint.getX() > premises.getTopLeft().getX() && startingPoint.getY() > premises.getTopLeft().getY())
             {
-                startingPoint.x--;
-                startingPoint.y--;
+                int x = startingPoint.getX();
+                int y = startingPoint.getY();
+                x--;
+                y--;
+                startingPoint.setX(x);
+                startingPoint.setY(y);
             }
         }
         public void bottomLeftDiagonal ()
         {
-            if (startingPoint.getX() > premises.topRight.x && startingPoint.getY() < premises.topRight.y)
+            if (startingPoint.getX() > premises.getTopRight().getX() && startingPoint.getY() < premises.getTopRight().getY())
             {
-                startingPoint.x--;
-                startingPoint.y++;
+                int x = startingPoint.getX();
+                int y = startingPoint.getY();
+                x--;
+                y++;
+                startingPoint.setX(x);
+                startingPoint.setY(y);
             }
         }
 
@@ -140,12 +166,16 @@ namespace GameObjects.BL
 
             for (int i = 0 ; i < shape.GetLength(0) ; i++)
             {
-                Console.SetCursorPosition(startingPoint.y + i , startingPoint.x);
                 for (int j = 0 ; j < shape.GetLength(1) ; j++)
                 {
+                    Console.SetCursorPosition(startingPoint.getY() + j , startingPoint.getX() + i);
                     Console.Write(shape[i , j]);
+                    /*     Console.Write(i);
+                         Console.Write(j);*/
+
                 }
             }
+            // Console.Write(shape[0 , 0]);
         }
     }
 }

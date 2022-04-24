@@ -8,8 +8,8 @@ namespace GameObjects.BL
 {
     class Point
     {
-        public int x;
-        public int y;
+        private int x;
+        private int y;
         public Point ()
         {
             x = 0;
